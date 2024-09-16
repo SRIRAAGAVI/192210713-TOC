@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+int main(){
+    char s[100];
+    int i,j,flag=1;
+    printf("Enter the string to check:");
+    scanf("%s",s);
+    int l=strlen(s);
+    for(i=0;i<l;i++){
+        if(s[i] != '0' && s[i] != '1'){
+            flag = 0;
+            break;
+        }
+    }
+    if(flag){
+        if((s[0] == '0' && s[l - 1] == '0')|| (s[0] == '1' && s[l - 1] == '1')){
+            printf("valid string");
+        }
+        else{
+            printf("invalid string");
+        }
+    }else{
+        printf("invalid string");
+    }
+    
+    return 0;
+}

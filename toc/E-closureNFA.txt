@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define M 100
+int ep[M][M];
+int clo[M][M];
+int n;
+void dfs(int s , int cs){
+    clo[cs][s]=1;
+    for(int ns=0;ns<n;ns++){
+        if(ep[s][ns] && !clo[cs][ns]){
+            dfs(ns,cs);
+        }
+    }
+}
+void compute(){
+    for(int s=0;s<n;s++){
+        dfs(s,s);
+    }
+}
+
+void print(){
+    for(int s=0;s<n;s++){
+        printf("e-closure of states:%d is :{",s);    
+        for(int i=0;i<n;i++){
+            if(clo[s][i]){
+                printf("%d,",i);
+            }
+        }
+        printf("}\n");
+    }
+}
+int main(){
+    n=4;
+    int i,j,k;
+    int tem[M][M] = {{0,1, 0, 0},
+                {0 ,0 ,1 ,0}, 
+                {0 ,0, 0, 1},
+                {0 ,0 ,0 ,0}};
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            ep[i][j]=tem[i][j];
+        }
+    }            
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            clo[i][j]=0;
+        }
+    }
+    compute();
+    print();
+    
+}
